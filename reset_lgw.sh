@@ -1,40 +1,41 @@
 #!/bin/sh
 
-# This script is intended to be used on IoT Starter Kit platform only, it
-# performs the following actions:
-#       - export/unpexort GPIO7 used to reset the SX1301 chip
+# This script performs the following actions for the LORIX One:
+#       - export/unpexort GPIOA1 used to reset the SX1301 chip
 #
 # Usage examples:
 #       ./reset_lgw.sh stop
 #       ./reset_lgw.sh start
 
-# The reset pin of SX1301 is wired with RPi GPIO7
-IOT_SK_SX1301_RESET_PIN=7
+# The reset pin of SX1301 is wired with GPIOA1
+SX1301_RST_PIN=1
+SX1301_RST_PIN_PATH=/sys/class/gpio/pioA1
 
 WAIT_GPIO() {
     sleep 0.1
 }
 
 iot_sk_init() {
-    # setup GPIO 7
-    echo "$IOT_SK_SX1301_RESET_PIN" > /sys/class/gpio/export; WAIT_GPIO
+    # setup GPIOA1
+    echo $SX1301_RST_PIN > /sys/class/gpio/export; WAIT_GPIO
 
-    # set GPIO 7 as output
-    echo "out" > /sys/class/gpio/gpio$IOT_SK_SX1301_RESET_PIN/direction; WAIT_GPIO
+    # set GPIOA1 as output
+    echo "out" > $SX1301_RST_PIN_PATH/direction; WAIT_GPIO
 
     # write output for SX1301 reset
-    echo "1" > /sys/class/gpio/gpio$IOT_SK_SX1301_RESET_PIN/value; WAIT_GPIO
-    echo "0" > /sys/class/gpio/gpio$IOT_SK_SX1301_RESET_PIN/value; WAIT_GPIO
-
-    # set GPIO 7 as input
-    echo "in" > /sys/class/gpio/gpio$IOT_SK_SX1301_RESET_PIN/direction; WAIT_GPIO
+    echo "1" > $SX1301_RST_PIN_PATH/value; WAIT_GPIO
+    echo "0" > $SX1301_RST_PIN_PATH/value; WAIT_GPIO
 }
 
 iot_sk_term() {
-    # cleanup GPIO 7
-    if [ -d /sys/class/gpio/gpio$IOT_SK_SX1301_RESET_PIN ]
+    # cleanup GPIOA1
+    if [ -d $SX1301_RST_PIN_PATH ]
     then
-        echo "$IOT_SK_SX1301_RESET_PIN" > /sys/class/gpio/unexport; WAIT_GPIO
+        # set GPIOA1 as input (then do a reset with the external pull-up)
+        echo "in" > $SX1301_RST_PIN_PATH/direction; WAIT_GPIO
+
+	# unexport GPIOA1
+        echo $SX1301_RST_PIN > /sys/class/gpio/unexport; WAIT_GPIO
     fi
 }
 

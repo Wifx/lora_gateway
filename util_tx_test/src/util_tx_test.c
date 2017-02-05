@@ -67,14 +67,14 @@ static struct lgw_tx_gain_lut_s txgain_lut = {
         .dig_gain = 0,
         .pa_gain = 0,
         .dac_gain = 3,
-        .mix_gain = 12,
+        .mix_gain = 15,
         .rf_power = 0
     },
     .lut[1] = {
         .dig_gain = 0,
         .pa_gain = 1,
         .dac_gain = 3,
-        .mix_gain = 12,
+        .mix_gain = 15,
         .rf_power = 10
     },
     .lut[2] = {
@@ -86,16 +86,16 @@ static struct lgw_tx_gain_lut_s txgain_lut = {
     },
     .lut[3] = {
         .dig_gain = 0,
-        .pa_gain = 3,
+        .pa_gain = 2,
         .dac_gain = 3,
-        .mix_gain = 9,
+        .mix_gain = 15,
         .rf_power = 20
     },
     .lut[4] = {
         .dig_gain = 0,
         .pa_gain = 3,
         .dac_gain = 3,
-        .mix_gain = 14,
+        .mix_gain = 12,
         .rf_power = 27
     }};
 

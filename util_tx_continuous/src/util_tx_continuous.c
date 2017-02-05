@@ -50,7 +50,7 @@ Maintainer: Matthieu Leurent
 #define DEFAULT_FREQ_HZ         868e6
 #define DEFAULT_DIGITAL_GAIN    0
 #define DEFAULT_DAC_GAIN        3
-#define DEFAULT_MIXER_GAIN      14
+#define DEFAULT_MIXER_GAIN      12
 #define DEFAULT_PA_GAIN         3
 #define DEFAULT_MODULATION      "LORA"
 #define DEFAULT_SF              7

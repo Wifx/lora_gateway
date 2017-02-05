@@ -143,7 +143,7 @@ static struct lgw_tx_gain_lut_s txgain_lut = {
         .dig_gain = 0,
         .pa_gain = 3,
         .dac_gain = 3,
-        .mix_gain = 14,
+        .mix_gain = 12,
         .rf_power = 27
     }};
 
